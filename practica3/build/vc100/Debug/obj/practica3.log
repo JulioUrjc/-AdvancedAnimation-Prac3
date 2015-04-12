@@ -1,15 +1,81 @@
-﻿Compilación iniciada a las 11/04/2015 16:13:44.
+﻿Compilación iniciada a las 11/04/2015 21:46:20.
      1>Proyecto "D:\Master\Animacion Avanzada (AA)\Prac3-Particulas\practica3\build\vc100\practica3.vcxproj" en el nodo 2 (Build destinos).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(356,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"..\..\third_party_libraries\freeglut-2.8.1\include" /I..\..\src\pcgsolver /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\obj\\" /Fd"Debug\obj\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\fluid2Exercise.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"..\..\third_party_libraries\freeglut-2.8.1\include" /I..\..\src\pcgsolver /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\obj\\" /Fd"Debug\obj\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\fluid2Exercise.cpp ..\..\src\scene.cpp
+         scene.cpp
          fluid2Exercise.cpp
-     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(38): warning C4018: '<' : no coinciden signed/unsigned
-     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(39): warning C4018: '<' : no coinciden signed/unsigned
-     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(57): warning C4018: '<' : no coinciden signed/unsigned
-     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(58): warning C4018: '<' : no coinciden signed/unsigned
-     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(73): warning C4018: '<' : no coinciden signed/unsigned
-     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(74): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(42): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(43): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(61): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(62): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(78): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(79): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(105): warning C4018: '<=' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(106): warning C4018: '<=' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(109): warning C4018: '<=' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(110): warning C4018: '<=' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(113): warning C4018: '<=' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(114): warning C4018: '<=' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(125): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(126): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(148): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(149): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(161): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(162): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(190): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(194): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(202): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(203): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(211): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(212): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(219): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(231): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(261): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(262): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(267): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(268): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(274): warning C4018: '<' : no coinciden signed/unsigned
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\pcgsolver\blas_wrapper.h(52): warning C4018: '<' : no coinciden signed/unsigned
+                 d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\pcgsolver\pcg_solver.h(255) : vea la referencia a la creación de instancias de plantilla de función 'void BLAS::add_scaled<T>(T,const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &)' que se está compilando
+                 with
+                 [
+                     T=double
+         ,            _Ty=double
+                 ]
+                 d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\pcgsolver\pcg_solver.h(246) : durante la compilación de la función miembro de plantilla de clase 'bool PCGSolver<double>::solve(const SparseMatrix<double> &,const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,T &,int &)'
+                 with
+                 [
+                     _Ty=double
+         ,            T=double
+                 ]
+                 d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(251) : vea la referencia a la creación de instancias de plantilla de función 'bool PCGSolver<double>::solve(const SparseMatrix<double> &,const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,T &,int &)' que se está compilando
+                 with
+                 [
+                     _Ty=double
+         ,            T=double
+                 ]
+                 d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\fluid2exercise.cpp(245) : vea la referencia a la creación de instancias de plantilla de clase 'PCGSolver<double>' que se está compilando
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\pcgsolver\blas_wrapper.h(17): warning C4018: '<' : no coinciden signed/unsigned
+                 d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\pcgsolver\pcg_solver.h(266) : vea la referencia a la creación de instancias de plantilla de función 'T BLAS::dot<double>(const std::vector<double,std::allocator<_Ty>> &,const std::vector<_Ty,std::allocator<_Ty>> &)' que se está compilando
+                 with
+                 [
+                     T=double
+         ,            _Ty=double
+                 ]
+     1>d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\pcgsolver\blas_wrapper.h(30): warning C4018: '<' : no coinciden signed/unsigned
+                 d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\pcgsolver\blas_wrapper.h(44) : vea la referencia a la creación de instancias de plantilla de función 'int BLAS::index_abs_max<double>(const std::vector<double,std::allocator<_Ty>> &)' que se está compilando
+                 with
+                 [
+                     _Ty=double
+                 ]
+                 d:\master\animacion avanzada (aa)\prac3-particulas\practica3\src\pcgsolver\pcg_solver.h(258) : vea la referencia a la creación de instancias de plantilla de función 'T BLAS::abs_max<double>(const std::vector<double,std::allocator<_Ty>> &)' que se está compilando
+                 with
+                 [
+                     T=double
+         ,            _Ty=double
+                 ]
+         Generando código...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Master\Animacion Avanzada (AA)\Prac3-Particulas\practica3\build\vc100\Debug\practica3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\third_party_libraries\freeglut-2.8.1\lib\Win32\Debug" freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Master\Animacion Avanzada (AA)\Prac3-Particulas\practica3\build\vc100\Debug\practica3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Master\Animacion Avanzada (AA)\Prac3-Particulas\practica3\build\vc100\Debug\practica3.lib" /MACHINE:X86 Debug\obj\fluid2Exercise.obj
          Debug\obj\fluidVisualizer2.obj
@@ -22,4 +88,4 @@
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:01.77
+Tiempo transcurrido 00:00:01.64
