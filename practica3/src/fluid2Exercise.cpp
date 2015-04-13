@@ -93,26 +93,45 @@ void Fluid2::fluidAdvection( const float dt ){
 			}
 }
 
-/***** Emission *****/
 void Fluid2::fluidEmission(){
-	if( Scene::testcase >= Scene::SMOKE ){
-		Bbox2 source(-0.18f, -1.9f, 0.18f, -1.7f);
-		Vec2 ismin = grid.getCellIndex(source.minPosition);
-		Vec2 ismax = grid.getCellIndex(source.maxPosition);
-		Index2 cornermin((int)floor(ismin.x), (int)floor(ismin.y));
-		Index2 cornermax((int)ceil(ismax.x), (int)ceil(ismax.y));
-		// emit source ink
-		for(int i= cornermin.x; i<= cornermax.x; ++i)
-		for(int j= cornermin.y; j<= cornermax.y; ++j)
-			ink[Index2(i, j)]= 1.0f;
-		// emit source velocity
-		for(int i= cornermin.x; i<= cornermax.x+1; ++i)
-		for(int j= cornermin.y; j<= cornermax.y; ++j)
-			velocityX[Index2(i, j)]= 0.0f;
+	if (Scene::testcase >= Scene::SMOKE){
+		Bbox2 box1(-1.9f, -1.9f, -1.7f, -1.7f);
+		Bbox2 box2(1.7f, -1.9f, 1.9f, -1.7f);
+		Bbox2 box3(-0.1f, 1.75f, 0.1f, 1.85f);
 
-		for(int i= cornermin.x; i<= cornermax.x; ++i)
-		for(int j= cornermin.y; j<= cornermax.y+1; ++j)
-			velocityY[Index2(i, j)]= 10.0f;
+		Index2 min((int)floor(grid.getCellIndex(box1.minPosition).x), (int)floor(grid.getCellIndex(box1.minPosition).y));
+		Index2 max((int)ceil(grid.getCellIndex(box1.maxPosition).x), (int)ceil(grid.getCellIndex(box1.maxPosition).y));
+
+		Index2 min2((int)floor(grid.getCellIndex(box2.minPosition).x), (int)floor(grid.getCellIndex(box2.minPosition).y));
+		Index2 max2((int)ceil(grid.getCellIndex(box2.maxPosition).x), (int)ceil(grid.getCellIndex(box2.maxPosition).y));
+
+		Index2 min3((int)floor(grid.getCellIndex(box3.minPosition).x), (int)floor(grid.getCellIndex(box3.minPosition).y));
+		Index2 max3((int)ceil(grid.getCellIndex(box3.maxPosition).x), (int)ceil(grid.getCellIndex(box3.maxPosition).y));
+
+		// emit box 1 ink and emit box 1 velocity
+		for(int i= min.x; i<= max.x; ++i)
+			for(int j= min.y; j<= max.y; ++j){
+				ink[Index2(i, j)] = 1.0f;
+				velocityX[Index2(i, j)] = 8.0f;
+				velocityY[Index2(i, j)] = 12.0f;
+			}
+
+		// emit box 2 ink and emit box 2 velocity
+		for(int i= min2.x; i<= max2.x; ++i)
+			for (int j= min2.y; j<= max2.y; ++j){
+				ink[Index2(i, j)] = 1.0f;
+				velocityX[Index2(i, j)] = -8.0f;
+				velocityY[Index2(i, j)] = 12.0f;
+			}
+			
+		// emit box 3 ink and emit box 3 velocity
+		for(int i= min3.x; i<= max3.x; ++i)
+			for(int j= min3.y; j<= max3.y; ++j){
+				ink[Index2(i, j)] = 1.0f;
+				velocityX[Index2(i, j)] = 0.0f;
+				velocityY[Index2(i, j)] = -10.0f;
+			}
+
 	}
 }
 
@@ -130,7 +149,6 @@ void Fluid2::fluidVolumeForces( const float dt ){
 		}
 	}
 }
-
 
 /***** Viscosity *****/
 void Fluid2::fluidViscosity( const float dt ){
@@ -193,7 +211,6 @@ void Fluid2::fluidPressureProjection( const float dt ){
 		}
 		for(int i= 0; i<sizeY.x; ++i){
 			velocityY[Index2(i, 0)] = 0.0f;
-			// velocityY[ Index2(i, sizeY.y-1)]= 0.0f;				// Top solid
 		}
 
 		// rhs
@@ -226,51 +243,45 @@ void Fluid2::fluidPressureProjection( const float dt ){
 					A.add_to_element(id, id, invsqrDy);
 					A.add_to_element(id, id2, -1.0*invsqrDy);
 				}
-				// Top air
+				
 				A.add_to_element(id, id, invsqrDy);
 				if (j< pSize.y-1){
 					int id2 = pressure.getLinearIndex(i, j+1);
 					A.add_to_element(id, id2, -1.0*invsqrDy);
 				}
-				
-				//if( j< pSize.y-1 ) {												// Top solid
-				//    int id2= pressure.getLinearIndex( i, j+1);
-				//    A.add_to_element(id, id, invsqrDy);
-				//	A.add_to_element(id, id2, -1.0*invsqrDy);
-				//}
 			}
 		}
 
 		// pcg solver
 		PCGSolver<double> solver;
-		solver.set_solver_parameters(1e-6, 10000);
+		solver.set_solver_parameters(1e-4, 100000);
 
 		double residual_out;
 		int iterations_out;
-		std::vector<double> p(pSize.x*pSize.y);
-		solver.solve(A, rhs, p, residual_out, iterations_out);
-		//std::cout << "Pressure system result: res=" << residual_out << ", iter=" << iterations_out << std::endl;
+		std::vector<double> result(pSize.x*pSize.y);
+		solver.solve(A, rhs, result, residual_out, iterations_out);
 		
-		// set pressure
+		// Set pressure
 		for(int i = 0, n= pSize.x*pSize.y; i< n; ++i)
-			pressure[i] = (float)p[i];
+			pressure[i] = (float)result[i];
 
-		// apply pressure gradient
+		// Pressure gradient
 		float K= dt/Scene::kDensity;
 
 		for(int i = 1; i< sizeX.x-1; ++i)
-		for(int j = 0; j< sizeX.y; ++j){
-			Index2 id(i, j);
-			float gradpressure= (pressure[id]-pressure[Index2(i-1, j)])*invDx;
-			velocityX[id] -= K*gradpressure;
-		}
+			for(int j = 0; j< sizeX.y; ++j){
+				Index2 id(i, j);
+				float gradpressure= (pressure[id]-pressure[Index2(i-1, j)])*invDx;
+				velocityX[id] -= K*gradpressure;
+			}
+
 		for(int i = 0; i< sizeY.x; ++i)
-		for(int j = 1; j< sizeY.y-1; ++j){
-			Index2 id(i, j);
-			float gradpressure= (pressure[id]-pressure[Index2(i, j-1)])*invDy;
-			velocityY[id] -= K*gradpressure;
-		}
-		// apply pressure gradient: Top air
+			for(int j = 1; j< sizeY.y-1; ++j){
+				Index2 id(i, j);
+				float gradpressure= (pressure[id]-pressure[Index2(i, j-1)])*invDy;
+				velocityY[id] -= K*gradpressure;
+			}
+
 		for (int i= 0; i< sizeY.x; ++i){
 			Index2 id(i, sizeY.y - 1);
 			float gradpressure= (0.0f-pressure[Index2(i, pSize.y-1)])*invDy;
