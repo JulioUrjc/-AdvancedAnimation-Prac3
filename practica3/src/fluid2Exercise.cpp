@@ -1,13 +1,12 @@
-
 #include "scene.h"
 #include "pcg_solver.h"
 
 namespace{
-	//////////////////////////////////////////////
-	// Add any custom classes or functions here! //
-	//////////////////////////////////////////////
+	////////////////////////////////////////////////
+	// Add any custom classes or functions here!  //
+	////////////////////////////////////////////////
 	
-	inline int clamp(int a, int b, int c){	return a<b ? b:(a>c ? c:a); }
+	inline int clamp(int a, int b, int c){	return a<b ? b:(a>c ? c:a);}
 
 	float interpolation(Vec2 idPos, Array2<float>& inkAux){
 		// Calculate min and max position
@@ -95,9 +94,9 @@ void Fluid2::fluidAdvection( const float dt ){
 
 void Fluid2::fluidEmission(){
 	if (Scene::testcase >= Scene::SMOKE){
-		Bbox2 box1(-1.9f, -1.9f, -1.7f, -1.7f);
-		Bbox2 box2(1.7f, -1.9f, 1.9f, -1.7f);
-		Bbox2 box3(-0.1f, 1.75f, 0.1f, 1.85f);
+		Bbox2 box1(-1.9f, -1.9f, -1.7f, -1.7f);		// Bottom left corner
+		Bbox2 box2(1.7f, -1.9f, 1.9f, -1.7f);		// Bottom right corner
+		Bbox2 box3(-0.1f, 1.75f, 0.1f, 1.85f);		// Top
 
 		Index2 min((int)floor(grid.getCellIndex(box1.minPosition).x), (int)floor(grid.getCellIndex(box1.minPosition).y));
 		Index2 max((int)ceil(grid.getCellIndex(box1.maxPosition).x), (int)ceil(grid.getCellIndex(box1.maxPosition).y));
@@ -159,14 +158,14 @@ void Fluid2::fluidViscosity( const float dt ){
 		Index2 sizeX= velocityX.getSize();				 									// X size
 		Index2 sizeY= velocityY.getSize();				 									// Y size
 
-		float dx= 1.0f/pow(grid.getCellDx().x, 2);
-		float dy= 1.0f/pow(grid.getCellDx().y, 2);
-		float cte= dt*Scene::kViscosity / Scene::kDensity;
+		float dx= 1.0f/pow(grid.getCellDx().x, 2);											// Dx Square inverse
+		float dy= 1.0f/pow(grid.getCellDx().y, 2);											// Dy Square inverse
+		float cte= dt*Scene::kViscosity / Scene::kDensity;									// Constant term
 
 		for(int i= 0; i<sizeX.x; ++i){
 			for(int j= 0; j<sizeX.y; ++j){
 				Index2 id(i, j);
-				// Calculate index of velocities
+				// Calculate index X of velocities
 				Index2 idX1(clamp(i+1, 0, sizeX.x-1), j);
 				Index2 idX2(clamp(i-1, 0, sizeX.x-1), j);
 				Index2 idX3(i, clamp(j+1, 0, sizeX.y-1));
@@ -179,7 +178,7 @@ void Fluid2::fluidViscosity( const float dt ){
 		for(int i= 0; i<sizeY.x; ++i){
 			for(int j= 0; j<sizeY.y; ++j){
 				Index2 id(i, j);
-				// Calculate index of velocities
+				// Calculate index Y of velocities
 				Index2 idY1(clamp(i+1, 0, sizeY.x-1), j);
 				Index2 idY2(clamp(i-1, 0, sizeY.x-1), j);
 				Index2 idY3(i, clamp(j+1, 0, sizeY.y-1));
@@ -195,10 +194,10 @@ void Fluid2::fluidViscosity( const float dt ){
 void Fluid2::fluidPressureProjection( const float dt ){
 	if( Scene::testcase >= Scene::SMOKE ){
 
-		float invDx   = 1.0f/grid.getCellDx().x;
-		float invDy   = 1.0f/grid.getCellDx().y;
-		float invsqrDx= 1.0f/pow(grid.getCellDx().x, 2);
-		float invsqrDy= 1.0f/pow(grid.getCellDx().y, 2);
+		float invDx   = 1.0f/grid.getCellDx().x;								// Dx inverse
+		float invDy   = 1.0f/grid.getCellDx().y;								// Dy inverse
+		float invsqrDx= 1.0f/pow(grid.getCellDx().x, 2);						// Dx Square inverse
+		float invsqrDy= 1.0f/pow(grid.getCellDx().y, 2);						// Dy Square inverse
 
 		Index2 pSize= pressure.getSize();
 		Index2 sizeX= velocityX.getSize();
@@ -252,7 +251,7 @@ void Fluid2::fluidPressureProjection( const float dt ){
 			}
 		}
 
-		// pcg solver
+		// Pcg solver
 		PCGSolver<double> solver;
 		solver.set_solver_parameters(1e-4, 100000);
 
@@ -261,7 +260,7 @@ void Fluid2::fluidPressureProjection( const float dt ){
 		std::vector<double> result(pSize.x*pSize.y);
 		solver.solve(A, rhs, result, residual_out, iterations_out);
 		
-		// Set pressure
+		// Pressure
 		for(int i = 0, n= pSize.x*pSize.y; i< n; ++i)
 			pressure[i] = (float)result[i];
 
